@@ -21,7 +21,7 @@ public class ClientClaimedChunks
 
 		public static final DataOut.Serializer<Team> SERIALIZER = (data, team) ->
 		{
-			data.writeShort(team.uid);
+			data.writeInt(team.uid);
 			data.writeTextComponent(team.nameComponent);
 			EnumTeamColor.NAME_MAP.write(data, team.color);
 			data.writeBoolean(team.isAlly);
@@ -30,7 +30,7 @@ public class ClientClaimedChunks
 
 		public static final DataIn.Deserializer<Team> DESERIALIZER = data ->
 		{
-			Team team = new Team(data.readShort());
+			Team team = new Team(data.readInt());
 			team.nameComponent = data.readTextComponent();
 			team.color = EnumTeamColor.NAME_MAP.read(data);
 			team.isAlly = data.readBoolean();
@@ -39,14 +39,14 @@ public class ClientClaimedChunks
 			return team;
 		};
 
-		public final short uid;
+		public final int uid;
 		public EnumTeamColor color;
 		public ITextComponent nameComponent;
 		public boolean isAlly;
 		public final Map<Integer, ChunkData> chunks = new Int2ObjectOpenHashMap<>();
 		public Object shapeProperties;
 
-		public Team(short id)
+		public Team(int id)
 		{
 			uid = id;
 		}

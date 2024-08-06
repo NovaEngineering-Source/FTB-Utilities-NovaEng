@@ -39,14 +39,15 @@ import java.util.List;
 		modid = FTBUtilities.MOD_ID,
 		name = FTBUtilities.MOD_NAME,
 		version = FTBUtilities.VERSION,
-		acceptableRemoteVersions = "*",
+//		Uid type is changed, old version is no longer supported.
+//		acceptableRemoteVersions = "*",
 		dependencies = FTBLib.THIS_DEP + ";before:" + KubeJS.MOD_ID + ";after:" + Aurora.MOD_ID
 )
 public class FTBUtilities
 {
 	public static final String MOD_ID = "ftbutilities";
 	public static final String MOD_NAME = "FTB Utilities";
-	public static final String VERSION = "0.0.0.ftbutilities";
+	public static final String VERSION = Tags.VERSION;
 	public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
 
 	@Mod.Instance(MOD_ID)
@@ -68,6 +69,7 @@ public class FTBUtilities
 	@Mod.EventHandler
 	public void onPreInit(FMLPreInitializationEvent event)
 	{
+		event.getModMetadata().version = VERSION;
 		PROXY.preInit();
 	}
 

@@ -16,7 +16,8 @@ import com.feed_the_beast.ftbutilities.data.ClaimedChunks;
 import com.feed_the_beast.ftbutilities.data.FTBUtilitiesTeamData;
 import com.feed_the_beast.ftbutilities.events.chunks.UpdateClientDataEvent;
 import com.feed_the_beast.ftbutilities.gui.ClientClaimedChunks;
-import it.unimi.dsi.fastutil.shorts.Short2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -32,7 +33,7 @@ import java.util.OptionalInt;
 public class MessageClaimedChunksUpdate extends MessageToClient
 {
 	public int startX, startZ, claimedChunks, loadedChunks, maxClaimedChunks, maxLoadedChunks;
-	public Short2ObjectOpenHashMap<ClientClaimedChunks.Team> teams;
+	public Int2ObjectMap<ClientClaimedChunks.Team> teams;
 
 	public MessageClaimedChunksUpdate()
 	{
@@ -61,7 +62,7 @@ public class MessageClaimedChunksUpdate extends MessageToClient
 
 		maxClaimedChunks = teamData.getMaxClaimChunks();
 		maxLoadedChunks = teamData.getMaxChunkloaderChunks();
-		teams = new Short2ObjectOpenHashMap<>();
+		teams = new Int2ObjectOpenHashMap<>();
 
 		boolean canSeeChunkInfo = PermissionAPI.hasPermission(player, FTBUtilitiesPermissions.CLAIMS_OTHER_SEE_INFO);
 
@@ -137,7 +138,7 @@ public class MessageClaimedChunksUpdate extends MessageToClient
 		maxClaimedChunks = data.readVarInt();
 		maxLoadedChunks = data.readVarInt();
 
-		teams = new Short2ObjectOpenHashMap<>();
+		teams = new Int2ObjectOpenHashMap<>();
 
 		for (ClientClaimedChunks.Team team : data.readCollection(ClientClaimedChunks.Team.DESERIALIZER))
 		{

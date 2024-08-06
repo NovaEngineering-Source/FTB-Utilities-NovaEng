@@ -38,9 +38,9 @@ public class FTBUtilitiesNotifications
 
 		ClaimedChunk chunk = ClaimedChunks.instance.getChunk(pos);
 		ForgeTeam team = chunk == null ? null : chunk.getTeam();
-		short teamID = team == null ? 0 : team.getUID();
+		int teamID = team == null ? 0 : team.getUID();
 
-		if (player.getEntityData().getShort(FTBUtilitiesPlayerData.TAG_LAST_CHUNK) != teamID)
+		if (player.getEntityData().getInteger(FTBUtilitiesPlayerData.TAG_LAST_CHUNK) != teamID)
 		{
 			if (teamID == 0)
 			{
@@ -48,7 +48,7 @@ public class FTBUtilitiesNotifications
 			}
 			else
 			{
-				player.getEntityData().setShort(FTBUtilitiesPlayerData.TAG_LAST_CHUNK, teamID);
+				player.getEntityData().setInteger(FTBUtilitiesPlayerData.TAG_LAST_CHUNK, teamID);
 			}
 
 			if (team != null)
